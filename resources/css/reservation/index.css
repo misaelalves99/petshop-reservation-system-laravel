@@ -1,0 +1,162 @@
+/* Container principal */
+.reservation-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Alertas */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid #28a745;
+}
+
+/* Ações principais */
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: #28a745;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #1e7e34;
+    transform: translateY(-2px);
+}
+
+/* Tabela */
+.reservation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+.reservation-table th,
+.reservation-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+.reservation-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #444;
+}
+
+.reservation-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+/* Coluna de ações */
+.actions-col {
+    width: 150px;
+}
+
+/* Status */
+.status {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status.completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status.canceled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Links de ação */
+.action-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin-right: 8px;
+    transition: color 0.2s;
+}
+
+.action-link.edit {
+    color: #28a745;
+}
+
+.action-link.edit:hover {
+    color: #1e7e34;
+}
+
+.action-link.delete {
+    color: #dc3545;
+}
+
+.action-link.delete:hover {
+    color: #a71d2a;
+}
+
+/* Form inline */
+.inline-form {
+    display: inline;
+}
+
+/* Linha vazia */
+.empty {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}

@@ -1,0 +1,89 @@
+/* resources/css/app.css */
+
+:root {
+    --primary: #4CAF50;
+    --secondary: #17a2b8;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --text: #333;
+    --radius: 6px;
+    --transition: 0.3s ease;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+main {
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* HEADER */
+header {
+    background-color: var(--primary);
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.logo .brand {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+header nav a:hover {
+    text-decoration: underline;
+    color: #e0ffe0;
+}
+
+/* MAIN */
+main {
+    padding: 30px 0;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #f1f1f1;
+    color: var(--dark);
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+    font-size: 0.9rem;
+}
