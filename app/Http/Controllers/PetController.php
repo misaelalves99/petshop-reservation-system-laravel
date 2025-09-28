@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Services\PetService;
+use App\Services\ServiceService;
 
 class PetController extends Controller
 {
@@ -13,7 +15,7 @@ class PetController extends Controller
      */
     public function index(Request $request)
     {
-        $pets = session('pets', []);
+        $pets = PetService::todos();
 
         // Filtro por nome (search)
         if ($request->filled('search')) {
@@ -61,14 +63,9 @@ class PetController extends Controller
             'age'     => 'nullable|integer|min:0',
         ]);
 
-        $pets = session('pets', []);
-        $data['id'] = count($pets) ? max(array_column($pets, 'id')) + 1 : 1;
-        $data['reservations'] = []; // lista de reservas em memória
-        $pets[] = $data;
+        PetService::criar($data);
 
-        session(['pets' => $pets]);
-
-        return redirect()->route('pet.index')->with('success', 'Pet created successfully.');
+        return redirect()->route('pet.index')->with('success', 'Pet criado com sucesso.');
     }
 
     /**
@@ -76,14 +73,13 @@ class PetController extends Controller
      */
     public function edit($id)
     {
-        $pets = session('pets', []);
-        $pet = collect($pets)->firstWhere('id', $id);
-
+        $pet = PetService::buscar($id);
         if (!$pet) {
-            abort(404, 'Pet not found.');
+            abort(404, 'Pet não encontrado');
         }
 
-        return view('pet.edit', compact('pet'));
+        $services = ServiceService::getAll(); // Para exibir nomes de serviços nas reservas
+        return view('pet.edit', compact('pet', 'services'));
     }
 
     /**
@@ -97,17 +93,9 @@ class PetController extends Controller
             'age'     => 'nullable|integer|min:0',
         ]);
 
-        $pets = session('pets', []);
-        foreach ($pets as &$pet) {
-            if ($pet['id'] == $id) {
-                $pet = array_merge($pet, $data);
-                break;
-            }
-        }
+        PetService::atualizar($id, $data);
 
-        session(['pets' => $pets]);
-
-        return redirect()->route('pet.index')->with('success', 'Pet updated successfully.');
+        return redirect()->route('pet.index')->with('success', 'Pet atualizado com sucesso.');
     }
 
     /**
@@ -115,12 +103,7 @@ class PetController extends Controller
      */
     public function destroy($id)
     {
-        $pets = session('pets', []);
-        $pets = array_filter($pets, fn($pet) => $pet['id'] != $id);
-
-        // Reindexa array para não ter gaps
-        session(['pets' => array_values($pets)]);
-
-        return redirect()->route('pet.index')->with('success', 'Pet deleted successfully.');
+        PetService::deletar($id);
+        return redirect()->route('pet.index')->with('success', 'Pet deletado com sucesso.');
     }
 }

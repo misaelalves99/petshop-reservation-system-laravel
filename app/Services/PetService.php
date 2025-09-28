@@ -12,9 +12,9 @@ class PetService
     {
         if (!session()->has('pets')) {
             $petsExemplo = [
-                ['id' => 1, 'nome' => 'Rex', 'especie' => 'Cachorro', 'idade' => 3],
-                ['id' => 2, 'nome' => 'Mia', 'especie' => 'Gato', 'idade' => 2],
-                ['id' => 3, 'nome' => 'Coelho', 'especie' => 'Coelho', 'idade' => 1],
+                ['id' => 1, 'name' => 'Rex', 'species' => 'Cachorro', 'age' => 3],
+                ['id' => 2, 'name' => 'Mia', 'species' => 'Gato', 'age' => 2],
+                ['id' => 3, 'name' => 'Coelho', 'species' => 'Coelho', 'age' => 1],
             ];
             session(['pets' => $petsExemplo]);
         }
@@ -38,7 +38,7 @@ class PetService
     }
 
     /**
-     * Cria um novo pet em memória
+     * Cria um novo pet
      */
     public static function criar(array $dados): array
     {
@@ -50,7 +50,7 @@ class PetService
     }
 
     /**
-     * Atualiza um pet existente em memória
+     * Atualiza um pet existente
      */
     public static function atualizar(int $id, array $dados): ?array
     {

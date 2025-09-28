@@ -10,14 +10,10 @@
 <div class="form-container">
     <h1 class="form-title">Editar Pet</h1>
 
-    <!-- Mensagens de sucesso -->
     @if(session('success'))
-        <div class="form-success">
-            {{ session('success') }}
-        </div>
+        <div class="form-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Mensagens de erro -->
     @if($errors->any())
         <div class="form-errors">
             <ul>
@@ -28,7 +24,6 @@
         </div>
     @endif
 
-    <!-- Formulário de edição do pet -->
     <form action="{{ route('pet.update', $pet['id']) }}" method="POST" class="pet-form">
         @csrf
         @method('PUT')
@@ -54,11 +49,14 @@
 
 <hr class="separator">
 
-<!-- Reservas do pet -->
 <div class="reservations-section">
     <h2>Reservas de {{ $pet['name'] }}</h2>
-
     <a href="{{ route('reservations.create') }}?pet_id={{ $pet['id'] }}" class="btn-new-reservation">Adicionar Nova Reserva</a>
+
+    @php
+        $allReservations = session('reservations', []);
+        $petReservations = array_filter($allReservations, fn($r) => $r['pet_id'] == $pet['id']);
+    @endphp
 
     <table class="reservations-table">
         <thead>
@@ -71,14 +69,8 @@
             </tr>
         </thead>
         <tbody>
-            @php
-                $allReservations = session('reservations', []);
-                $petReservations = array_filter($allReservations, fn($r) => $r['pet_id'] == $pet['id']);
-            @endphp
-
             @forelse($petReservations as $res)
                 @php
-                    $services = session('services', []);
                     $service = collect($services)->firstWhere('id', $res['service_id']);
                 @endphp
                 <tr>
@@ -86,7 +78,7 @@
                     <td>{{ $res['date'] }}</td>
                     <td>{{ $res['time'] }}</td>
                     <td>{{ ucfirst($res['status'] ?? 'pendente') }}</td>
-                    <td class="actions">
+                    <td>
                         <a href="{{ route('reservations.edit', $res['id']) }}" class="action-edit">Editar</a>
                         <form action="{{ route('reservations.destroy', $res['id']) }}" method="POST" style="display:inline;">
                             @csrf
