@@ -101,18 +101,6 @@ class ReservationController extends Controller
     }
 
     /**
-     * Remove uma reserva
-     */
-    public function destroy($id)
-    {
-        $reservations = session('reservations', []);
-        $reservations = array_filter($reservations, fn($r) => $r['id'] != $id);
-        session(['reservations' => array_values($reservations)]);
-
-        return redirect()->route('reservations.index')->with('success', 'Reserva excluída com sucesso.');
-    }
-
-    /**
      * Dashboard / relatório simples
      */
     public function dashboard()
@@ -153,5 +141,35 @@ class ReservationController extends Controller
         if (!$reservation) abort(404, 'Reserva não encontrada');
 
         return view('reservation.details', compact('reservation'));
+    }
+
+    public function delete($id)
+    {
+        // Recupera as reservas e pets da sessão (ou do banco, se usar DB)
+        $reservations = session('reservations', []);
+        $pets = session('pets', []);
+
+        // Encontra a reserva pelo id
+        $reservation = collect($reservations)->first(fn($r) => $r['id'] == $id);
+
+        // Adiciona o pet à reserva, se encontrado
+        if ($reservation) {
+            $reservation['pet'] = collect($pets)->first(fn($p) => $p['id'] == ($reservation['pet_id'] ?? null));
+        }
+
+        // Passa a variável para a view
+        return view('reservation.delete', compact('reservation'));
+    }
+
+    /**
+     * Remove uma reserva
+     */
+    public function destroy($id)
+    {
+        $reservations = session('reservations', []);
+        $reservations = array_filter($reservations, fn($r) => $r['id'] != $id);
+        session(['reservations' => array_values($reservations)]);
+
+        return redirect()->route('reservations.index')->with('success', 'Reserva excluída com sucesso.');
     }
 }

@@ -26,7 +26,7 @@
         $pets = session('pets', []);
 
         foreach($reservations as &$res) {
-            $res['pet'] = collect($pets)->first(fn($p) => $p['id'] == $res['pet_id']);
+            $res['pet'] = collect($pets)->first(fn($p) => $p['id'] == ($res['pet_id'] ?? null));
         }
     @endphp
 
@@ -48,8 +48,8 @@
                 <tr>
                     <td>{{ $res['pet']['name'] ?? '-' }}</td>
                     <td>{{ $res['service_type'] ?? '-' }}</td>
-                    <td>{{ $res['date'] }}</td>
-                    <td>{{ $res['time'] }}</td>
+                    <td>{{ $res['date'] ?? '-' }}</td>
+                    <td>{{ $res['time'] ?? '-' }}</td>
                     <td>
                         <span class="status {{ strtolower($res['status'] ?? 'pendente') }}">
                             {{ ucfirst($res['status'] ?? 'Pendente') }}
@@ -57,14 +57,11 @@
                     </td>
                     <td>
                         <a href="{{ route('reservations.edit', $res['id']) }}" class="action-link edit">Editar</a>
-                        <form action="{{ route('reservations.destroy', $res['id']) }}" method="POST" class="inline-form">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="action-link delete"
-                                onclick="return confirm('Tem certeza que deseja deletar esta reserva?')">
-                                Excluir
-                            </button>
-                        </form>
+
+                        <!-- Botão de exclusão agora abre a página de confirmação -->
+                        <a href="{{ route('reservations.delete', $res['id']) }}" class="btn btn-danger">
+                            Excluir
+                        </a>
                     </td>
                     <td>
                         <a href="{{ route('reservations.details', $res['id']) }}" class="btn-details">Ver Detalhes</a>

@@ -44,14 +44,7 @@
                         <td>{{ $service['duration'] }}</td>
                         <td class="table-actions">
                             <a href="{{ route('service.edit', $service['id']) }}" class="btn-link edit">Editar</a>
-                            <form action="{{ route('service.destroy', $service['id']) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-link delete"
-                                    onclick="return confirm('Tem certeza que deseja excluir este serviço?')">
-                                    Excluir
-                                </button>
-                            </form>
+                            <a href="{{ route('service.delete', $service['id']) }}" class="btn-link delete">Excluir</a>
                         </td>
                         <td>
                             <a href="{{ route('service.details', $service['id']) }}" class="btn-details">Ver Detalhes</a>

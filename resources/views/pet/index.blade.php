@@ -64,11 +64,7 @@
                         <td class="actions">
                             <a href="{{ route('pet.edit', $pet['id']) }}" class="action-edit">Editar</a>
                             <a href="{{ route('reservations.create') }}?pet_id={{ $pet['id'] }}" class="action-add">Adicionar Reserva</a>
-                            <form action="{{ route('pet.destroy', $pet['id']) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="action-delete" onclick="return confirm('Tem certeza que deseja deletar este pet?')">Deletar</button>
-                            </form>
+                            <a href="{{ route('pet.delete', $pet['id']) }}" class="action-delete">Deletar</a>
                         </td>
                         <td class="details">
                             <a href="{{ route('pet.details', $pet['id']) }}" class="btn-details">Ver Detalhes</a>

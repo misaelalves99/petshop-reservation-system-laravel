@@ -118,4 +118,16 @@ class PetController extends Controller
 
         return view('pet.details', compact('pet'));
     }
+
+    public function delete($id)
+    {
+        $pets = session('pets', []);
+        $pet = collect($pets)->firstWhere('id', $id);
+
+        if (!$pet) {
+            abort(404, 'Pet não encontrado');
+        }
+
+        return view('pet.delete', compact('pet'));
+    }
 }

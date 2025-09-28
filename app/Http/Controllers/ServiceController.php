@@ -109,6 +109,23 @@ class ServiceController extends Controller
         return redirect()->route('service.index')->with('success', 'Serviço excluído com sucesso.');
     }
 
+    public function delete($id)
+    {
+        $reservations = session('reservations', []);
+        $pets = session('pets', []);
+
+        $reservation = collect($reservations)->first(fn($r) => $r['id'] == $id);
+
+        if ($reservation) {
+            $reservation['pet'] = collect($pets)->first(fn($p) => $p['id'] == ($reservation['pet_id'] ?? null));
+        }
+
+        return view('reservation.delete', [
+            'reservation' => $reservation,
+            'id' => $id
+        ]);
+    }
+
     public function details($id)
     {
         $services = session('services', []);
