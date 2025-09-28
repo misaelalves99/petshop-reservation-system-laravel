@@ -4,21 +4,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PetController extends Controller
 {
     /**
-     * Lista todos os pets com filtro por nome e paginação.
-     * Se estiver usando in-memory, substitua Pet::withCount() por array_count_values()
+     * Lista todos os pets com filtro por nome e paginação
      */
     public function index(Request $request)
     {
-        // Exemplo em memória (substitui Pet::withCount('reservations') se não houver DB)
         $pets = session('pets', []);
 
-        // Filtro por nome
+        // Filtro por nome (search)
         if ($request->filled('search')) {
-            $pets = array_filter($pets, fn($pet) => str_contains(strtolower($pet['name']), strtolower($request->search)));
+            $search = strtolower($request->search);
+            $pets = array_filter($pets, fn($pet) => str_contains(strtolower($pet['name']), $search));
         }
 
         // Paginação manual (10 por página)
@@ -28,13 +28,15 @@ class PetController extends Controller
         $offset = ($currentPage - 1) * $perPage;
         $pagedPets = array_slice($pets, $offset, $perPage);
 
-        // Cria um objeto tipo LengthAwarePaginator para compatibilidade com Blade
-        $pagedPets = new \Illuminate\Pagination\LengthAwarePaginator(
+        $pagedPets = new LengthAwarePaginator(
             $pagedPets,
             $total,
             $perPage,
             $currentPage,
-            ['path' => $request->url(), 'query' => $request->query()]
+            [
+                'path' => $request->url(),
+                'query' => $request->query(),
+            ]
         );
 
         return view('pet.index', ['pets' => $pagedPets]);
@@ -54,14 +56,14 @@ class PetController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'    => 'required|string|max:255',
             'species' => 'required|string|max:255',
-            'age' => 'nullable|integer|min:0',
+            'age'     => 'nullable|integer|min:0',
         ]);
 
         $pets = session('pets', []);
         $data['id'] = count($pets) ? max(array_column($pets, 'id')) + 1 : 1;
-        $data['reservations'] = [];
+        $data['reservations'] = []; // lista de reservas em memória
         $pets[] = $data;
 
         session(['pets' => $pets]);
@@ -70,7 +72,7 @@ class PetController extends Controller
     }
 
     /**
-     * Exibe o formulário de edição
+     * Exibe o formulário de edição de pet
      */
     public function edit($id)
     {
@@ -81,7 +83,7 @@ class PetController extends Controller
             abort(404, 'Pet not found.');
         }
 
-        return view('pet.edit', ['pet' => $pet]);
+        return view('pet.edit', compact('pet'));
     }
 
     /**
@@ -90,9 +92,9 @@ class PetController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'    => 'required|string|max:255',
             'species' => 'required|string|max:255',
-            'age' => 'nullable|integer|min:0',
+            'age'     => 'nullable|integer|min:0',
         ]);
 
         $pets = session('pets', []);
@@ -115,6 +117,8 @@ class PetController extends Controller
     {
         $pets = session('pets', []);
         $pets = array_filter($pets, fn($pet) => $pet['id'] != $id);
+
+        // Reindexa array para não ter gaps
         session(['pets' => array_values($pets)]);
 
         return redirect()->route('pet.index')->with('success', 'Pet deleted successfully.');
