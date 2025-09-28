@@ -1,3 +1,5 @@
+<!-- petshop-reservation-system/resources/views/service/index.blade.php -->
+
 @extends('layouts.app')
 
 @push('styles')
@@ -30,7 +32,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Preço</th>
+                    <th>Preço (R$)</th>
                     <th>Duração (min)</th>
                     <th>Ações</th>
                 </tr>

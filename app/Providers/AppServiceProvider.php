@@ -34,6 +34,12 @@ class AppServiceProvider extends ServiceProvider
                 ['id' => 1, 'name' => 'Banho', 'price' => 25.00, 'duration' => 30],
                 ['id' => 2, 'name' => 'Tosa', 'price' => 50.00, 'duration' => 60],
                 ['id' => 3, 'name' => 'Corte de Unhas', 'price' => 15.00, 'duration' => 15],
+                ['id' => 4, 'name' => 'Escovação', 'price' => 20.00, 'duration' => 20],
+                ['id' => 5, 'name' => 'Hidratação', 'price' => 35.00, 'duration' => 40],
+                ['id' => 6, 'name' => 'Limpeza de Ouvidos', 'price' => 10.00, 'duration' => 10],
+                ['id' => 7, 'name' => 'Banho e Tosa Completo', 'price' => 70.00, 'duration' => 90],
+                ['id' => 8, 'name' => 'Tosa Higiênica', 'price' => 30.00, 'duration' => 25],
+                ['id' => 9, 'name' => 'Tratamento Antipulgas', 'price' => 40.00, 'duration' => 45],
             ]]);
         }
 

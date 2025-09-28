@@ -15,21 +15,21 @@ class ServiceController extends Controller
         $services = session('services', []);
 
         // Paginação manual (10 por página)
-        $perPage = 10;
-        $currentPage = request()->input('page', 1);
+        $porPagina = 10;
+        $paginaAtual = request()->input('page', 1);
         $total = count($services);
-        $offset = ($currentPage - 1) * $perPage;
-        $pagedServices = array_slice($services, $offset, $perPage);
+        $offset = ($paginaAtual - 1) * $porPagina;
+        $servicosPaginados = array_slice($services, $offset, $porPagina);
 
-        $pagedServices = new \Illuminate\Pagination\LengthAwarePaginator(
-            $pagedServices,
+        $servicosPaginados = new \Illuminate\Pagination\LengthAwarePaginator(
+            $servicosPaginados,
             $total,
-            $perPage,
-            $currentPage,
+            $porPagina,
+            $paginaAtual,
             ['path' => request()->url(), 'query' => request()->query()]
         );
 
-        return view('service.index', ['services' => $pagedServices]);
+        return view('service.index', ['services' => $servicosPaginados]);
     }
 
     /**
@@ -57,7 +57,7 @@ class ServiceController extends Controller
 
         session(['services' => $services]);
 
-        return redirect()->route('service.index')->with('success', 'Service created successfully.');
+        return redirect()->route('service.index')->with('success', 'Serviço criado com sucesso.');
     }
 
     /**
@@ -68,7 +68,7 @@ class ServiceController extends Controller
         $services = session('services', []);
         $service = collect($services)->firstWhere('id', $id);
 
-        if (!$service) abort(404, 'Service not found');
+        if (!$service) abort(404, 'Serviço não encontrado');
 
         return view('service.edit', compact('service'));
     }
@@ -94,7 +94,7 @@ class ServiceController extends Controller
 
         session(['services' => $services]);
 
-        return redirect()->route('service.index')->with('success', 'Service updated successfully.');
+        return redirect()->route('service.index')->with('success', 'Serviço atualizado com sucesso.');
     }
 
     /**
@@ -106,6 +106,6 @@ class ServiceController extends Controller
         $services = array_filter($services, fn($s) => $s['id'] != $id);
         session(['services' => array_values($services)]);
 
-        return redirect()->route('service.index')->with('success', 'Service deleted successfully.');
+        return redirect()->route('service.index')->with('success', 'Serviço excluído com sucesso.');
     }
 }
