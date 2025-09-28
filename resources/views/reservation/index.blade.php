@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="reservation-container">
-    <h1 class="page-title">Reservations</h1>
+    <h1 class="page-title">Reservas</h1>
 
     <!-- Mensagem de sucesso -->
     @if(session('success'))
@@ -17,8 +17,8 @@
 
     <!-- Ações principais -->
     <div class="actions">
-        <a href="{{ route('reservations.create') }}" class="btn btn-primary">New Reservation</a>
-        <a href="{{ route('reservation.report') }}" class="btn btn-success">View Report</a>
+        <a href="{{ route('reservations.create') }}" class="btn btn-primary">Nova Reserva</a>
+        <a href="{{ route('reservation.report') }}" class="btn btn-success">Ver Relatório</a>
     </div>
 
     @php
@@ -35,40 +35,40 @@
         <thead>
             <tr>
                 <th>Pet</th>
-                <th>Service</th>
-                <th>Date</th>
-                <th>Time</th>
+                <th>Serviço</th>
+                <th>Data</th>
+                <th>Hora</th>
                 <th>Status</th>
-                <th class="actions-col">Actions</th>
+                <th class="actions-col">Ações</th>
             </tr>
         </thead>
         <tbody>
             @forelse($reservations as $res)
                 <tr>
                     <td>{{ $res['pet']['name'] ?? '-' }}</td>
-                    <td>{{ $res['service_type'] }}</td>
+                    <td>{{ $res['service_type'] ?? '-' }}</td>
                     <td>{{ $res['date'] }}</td>
                     <td>{{ $res['time'] }}</td>
                     <td>
-                        <span class="status {{ strtolower($res['status'] ?? 'pending') }}">
-                            {{ ucfirst($res['status'] ?? 'Pending') }}
+                        <span class="status {{ strtolower($res['status'] ?? 'pendente') }}">
+                            {{ ucfirst($res['status'] ?? 'Pendente') }}
                         </span>
                     </td>
                     <td>
-                        <a href="{{ route('reservations.edit', $res['id']) }}" class="action-link edit">Edit</a>
+                        <a href="{{ route('reservations.edit', $res['id']) }}" class="action-link edit">Editar</a>
                         <form action="{{ route('reservations.destroy', $res['id']) }}" method="POST" class="inline-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="action-link delete"
-                                onclick="return confirm('Are you sure you want to delete this reservation?')">
-                                Delete
+                                onclick="return confirm('Tem certeza que deseja deletar esta reserva?')">
+                                Excluir
                             </button>
                         </form>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="empty">No reservations found.</td>
+                    <td colspan="6" class="empty">Nenhuma reserva encontrada.</td>
                 </tr>
             @endforelse
         </tbody>

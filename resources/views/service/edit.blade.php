@@ -1,5 +1,3 @@
-<!-- petshop-reservation-system/resources/views/service/edit.blade.php -->
-
 @extends('layouts.app')
 
 @push('styles')
@@ -8,7 +6,7 @@
 
 @section('content')
 <div class="service-edit-container">
-    <h1 class="page-title">Edit Service</h1>
+    <h1 class="page-title">Editar Serviço</h1>
 
     <!-- Mensagens de erro -->
     @if($errors->any())
@@ -31,21 +29,21 @@
         @method('PUT')
 
         <div class="form-group">
-            <label for="name">Name:</label>
+            <label for="name">Nome:</label>
             <input type="text" name="name" id="name" value="{{ old('name', $service['name']) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="price">Price:</label>
+            <label for="price">Preço:</label>
             <input type="number" step="0.01" name="price" id="price" value="{{ old('price', $service['price']) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="duration">Duration (minutes):</label>
+            <label for="duration">Duração (minutos):</label>
             <input type="number" name="duration" id="duration" value="{{ old('duration', $service['duration']) }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Service</button>
+        <button type="submit" class="btn btn-primary">Atualizar Serviço</button>
     </form>
 </div>
 @endsection

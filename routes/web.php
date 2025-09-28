@@ -37,9 +37,23 @@ Route::get('service/{service}/edit', [ServiceController::class, 'edit'])->name('
 Route::put('service/{service}', [ServiceController::class, 'update'])->name('service.update');
 Route::delete('service/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
 
-// Reservations
-Route::get('reservation', [ReservationController::class, 'index'])->name('reservations.index');
-Route::get('reservation/create', [ReservationController::class, 'create'])->name('reservations.create');
-Route::post('reservation', [ReservationController::class, 'store'])->name('reservations.store');
-// Dashboard/Report em memória
-Route::get('reservation/report', [ReservationController::class, 'dashboard'])->name('reservation.report');
+// Reservations (CRUD completo)
+Route::prefix('reservation')->group(function () {
+
+    // Listagem
+    Route::get('/', [ReservationController::class, 'index'])->name('reservations.index');
+
+    // Criação
+    Route::get('/create', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::post('/', [ReservationController::class, 'store'])->name('reservations.store');
+
+    // Edição
+    Route::get('/{id}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
+    Route::put('/{id}', [ReservationController::class, 'update'])->name('reservations.update');
+
+    // Exclusão
+    Route::delete('/{id}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+
+    // Relatório / Dashboard
+    Route::get('/report', [ReservationController::class, 'dashboard'])->name('reservation.report');
+});

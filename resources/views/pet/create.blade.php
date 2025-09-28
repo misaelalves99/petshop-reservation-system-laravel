@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="form-container">
-    <h1 class="form-title">Add New Pet</h1>
+    <h1 class="form-title">Adicionar Novo Pet</h1>
 
     @if($errors->any())
         <div class="form-errors">
@@ -21,21 +21,21 @@
     <form action="{{ route('pet.store') }}" method="POST" class="pet-form">
         @csrf
         <div class="form-group">
-            <label for="name">Name:</label>
+            <label for="name">Nome:</label>
             <input type="text" name="name" id="name" value="{{ old('name') }}" required>
         </div>
 
         <div class="form-group">
-            <label for="species">Species:</label>
+            <label for="species">Espécie:</label>
             <input type="text" name="species" id="species" value="{{ old('species') }}" required>
         </div>
 
         <div class="form-group">
-            <label for="age">Age:</label>
+            <label for="age">Idade:</label>
             <input type="number" name="age" id="age" value="{{ old('age') }}">
         </div>
 
-        <button type="submit" class="btn-submit">Create Pet</button>
+        <button type="submit" class="btn-submit">Criar Pet</button>
     </form>
 </div>
 @endsection

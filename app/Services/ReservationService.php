@@ -10,8 +10,6 @@ class ReservationService
      */
     public static function getPets(): array
     {
-        // Garante que os pets de exemplo existam
-        \App\Services\PetService::seed();
         return session('pets', []);
     }
 
@@ -20,8 +18,6 @@ class ReservationService
      */
     public static function getServices(): array
     {
-        // Garante que os serviços de exemplo existam
-        \App\Services\ServiceService::seed();
         return session('services', []);
     }
 
@@ -49,8 +45,6 @@ class ReservationService
     {
         $reservations = session('reservations', []);
         $data['id'] = count($reservations) ? max(array_column($reservations, 'id')) + 1 : 1;
-        // Status padrão
-        $data['status'] = $data['status'] ?? 'pendente';
         $reservations[] = $data;
         session(['reservations' => $reservations]);
     }

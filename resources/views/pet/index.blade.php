@@ -1,5 +1,3 @@
-<!-- petshop-reservation-system/resources/views/pet/index.blade.php -->
-
 @extends('layouts.app')
 
 @push('styles')
@@ -20,10 +18,10 @@
     <!-- Busca e botão de adicionar pet -->
     <div class="search-add-container">
         <form method="GET" action="{{ route('pet.index') }}" class="search-form">
-            <input type="text" name="search" placeholder="Search by name" value="{{ request('search') }}">
-            <button type="submit">Search</button>
+            <input type="text" name="search" placeholder="Pesquisar por nome" value="{{ request('search') }}">
+            <button type="submit">Buscar</button>
         </form>
-        <a href="{{ route('pet.create') }}" class="btn-add-pet">Add New Pet</a>
+        <a href="{{ route('pet.create') }}" class="btn-add-pet">Adicionar Novo Pet</a>
     </div>
 
     @php
@@ -40,11 +38,11 @@
         <table class="pets-table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Species</th>
-                    <th>Age</th>
-                    <th>Reservations</th>
-                    <th>Actions</th>
+                    <th>Nome</th>
+                    <th>Espécie</th>
+                    <th>Idade</th>
+                    <th>Reservas</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,22 +57,22 @@
                         <td>{{ $pet['age'] ?? '-' }}</td>
                         <td>
                             <a href="{{ route('pet.edit', $pet['id']) }}" class="link-reservations">
-                                {{ count($petReservations) }} reservation(s)
+                                {{ count($petReservations) }} reserva(s)
                             </a>
                         </td>
                         <td class="actions">
-                            <a href="{{ route('pet.edit', $pet['id']) }}" class="action-edit">Edit</a>
-                            <a href="{{ route('reservations.create') }}?pet_id={{ $pet['id'] }}" class="action-add">Add Reservation</a>
+                            <a href="{{ route('pet.edit', $pet['id']) }}" class="action-edit">Editar</a>
+                            <a href="{{ route('reservations.create') }}?pet_id={{ $pet['id'] }}" class="action-add">Adicionar Reserva</a>
                             <form action="{{ route('pet.destroy', $pet['id']) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="action-delete" onclick="return confirm('Are you sure you want to delete this pet?')">Delete</button>
+                                <button type="submit" class="action-delete" onclick="return confirm('Tem certeza que deseja deletar este pet?')">Deletar</button>
                             </form>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="no-data">No pets found.</td>
+                        <td colspan="5" class="no-data">Nenhum pet encontrado.</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -8,56 +8,56 @@ class PetService
     /**
      * Inicializa pets de exemplo em memória, se ainda não existirem
      */
-    public static function seed(): void
+    public static function inicializar(): void
     {
         if (!session()->has('pets')) {
-            $examplePets = [
-                ['id' => 1, 'name' => 'Rex', 'species' => 'Cachorro', 'age' => 3],
-                ['id' => 2, 'name' => 'Mia', 'species' => 'Gato', 'age' => 2],
-                ['id' => 3, 'name' => 'Coelho', 'species' => 'Coelho', 'age' => 1],
+            $petsExemplo = [
+                ['id' => 1, 'nome' => 'Rex', 'especie' => 'Cachorro', 'idade' => 3],
+                ['id' => 2, 'nome' => 'Mia', 'especie' => 'Gato', 'idade' => 2],
+                ['id' => 3, 'nome' => 'Coelho', 'especie' => 'Coelho', 'idade' => 1],
             ];
-            session(['pets' => $examplePets]);
+            session(['pets' => $petsExemplo]);
         }
     }
 
     /**
      * Retorna todos os pets
      */
-    public static function getAll(): array
+    public static function todos(): array
     {
-        self::seed();
+        self::inicializar();
         return session('pets', []);
     }
 
     /**
-     * Retorna um pet por ID
+     * Retorna um pet pelo ID
      */
-    public static function find(int $id): ?array
+    public static function buscar(int $id): ?array
     {
-        return collect(self::getAll())->firstWhere('id', $id);
+        return collect(self::todos())->firstWhere('id', $id);
     }
 
     /**
      * Cria um novo pet em memória
      */
-    public static function create(array $data): array
+    public static function criar(array $dados): array
     {
-        $pets = self::getAll();
-        $data['id'] = count($pets) ? max(array_column($pets, 'id')) + 1 : 1;
-        $pets[] = $data;
+        $pets = self::todos();
+        $dados['id'] = count($pets) ? max(array_column($pets, 'id')) + 1 : 1;
+        $pets[] = $dados;
         session(['pets' => $pets]);
-        return $data;
+        return $dados;
     }
 
     /**
      * Atualiza um pet existente em memória
      */
-    public static function update(int $id, array $data): ?array
+    public static function atualizar(int $id, array $dados): ?array
     {
-        $pets = self::getAll();
+        $pets = self::todos();
         foreach ($pets as &$pet) {
             if ($pet['id'] === $id) {
-                $pet = array_merge($pet, $data);
+                $pet = array_merge($pet, $dados);
                 session(['pets' => $pets]);
                 return $pet;
             }
@@ -68,11 +68,11 @@ class PetService
     /**
      * Deleta um pet pelo ID
      */
-    public static function delete(int $id): bool
+    public static function deletar(int $id): bool
     {
-        $pets = self::getAll();
-        $filtered = array_filter($pets, fn($p) => $p['id'] !== $id);
-        session(['pets' => array_values($filtered)]);
-        return count($pets) !== count($filtered);
+        $pets = self::todos();
+        $filtrados = array_filter($pets, fn($p) => $p['id'] !== $id);
+        session(['pets' => array_values($filtrados)]);
+        return count($pets) !== count($filtrados);
     }
 }

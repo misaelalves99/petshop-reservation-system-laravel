@@ -1,5 +1,3 @@
-<!-- petshop-reservation-system/resources/views/reservation/report.blade.php -->
-
 @extends('layouts.app')
 
 @push('styles')
@@ -8,7 +6,7 @@
 
 @section('content')
 <div class="report-container">
-    <h1 class="report-title">Reservation Report</h1>
+    <h1 class="report-title">Relatório de Reservas</h1>
 
     @php
         $allReservations = session('reservations', []);
@@ -30,23 +28,23 @@
 
     <!-- Formulário de filtros -->
     <form method="GET" action="{{ route('reservation.report') }}" class="filter-form">
-        <label for="start_date">From:</label>
+        <label for="start_date">De:</label>
         <input type="date" name="start_date" id="start_date" value="{{ request('start_date') }}">
 
-        <label for="end_date">To:</label>
+        <label for="end_date">Até:</label>
         <input type="date" name="end_date" id="end_date" value="{{ request('end_date') }}">
 
-        <button type="submit" class="btn btn-primary">Filter</button>
-        <a href="{{ route('reservation.report') }}" class="btn btn-secondary">Reset</a>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+        <a href="{{ route('reservation.report') }}" class="btn btn-secondary">Redefinir</a>
     </form>
 
     <!-- Resumo -->
     <div class="summary-card">
-        <h3>Summary</h3>
+        <h3>Resumo</h3>
         <ul>
-            <li><strong>Total Reservations:</strong> {{ count($allReservations) }}</li>
-            <li><strong>Bath:</strong> {{ count(array_filter($allReservations, fn($r) => $r['service_type']=='Bath')) }}</li>
-            <li><strong>Grooming:</strong> {{ count(array_filter($allReservations, fn($r) => $r['service_type']=='Grooming')) }}</li>
+            <li><strong>Total de Reservas:</strong> {{ count($allReservations) }}</li>
+            <li><strong>Banho:</strong> {{ count(array_filter($allReservations, fn($r) => $r['service_type']=='Bath')) }}</li>
+            <li><strong>Tosa:</strong> {{ count(array_filter($allReservations, fn($r) => $r['service_type']=='Grooming')) }}</li>
         </ul>
     </div>
 
@@ -56,9 +54,9 @@
             <thead>
                 <tr>
                     <th>Pet</th>
-                    <th>Service</th>
-                    <th>Date</th>
-                    <th>Time</th>
+                    <th>Serviço</th>
+                    <th>Data</th>
+                    <th>Hora</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -70,14 +68,14 @@
                         <td>{{ $res['date'] }}</td>
                         <td>{{ $res['time'] }}</td>
                         <td>
-                            <span class="status {{ strtolower($res['status'] ?? 'pending') }}">
-                                {{ ucfirst($res['status'] ?? 'Pending') }}
+                            <span class="status {{ strtolower($res['status'] ?? 'pendente') }}">
+                                {{ ucfirst($res['status'] ?? 'Pendente') }}
                             </span>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="no-data">No reservations found.</td>
+                        <td colspan="5" class="no-data">Nenhuma reserva encontrada.</td>
                     </tr>
                 @endforelse
             </tbody>

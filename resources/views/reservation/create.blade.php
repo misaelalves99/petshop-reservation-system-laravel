@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="reservation-container">
-    <h1 class="page-title">New Reservation</h1>
+    <h1 class="page-title">Nova Reserva</h1>
 
     <!-- Mensagem de sucesso -->
     @if(session('success'))
@@ -28,6 +28,7 @@
 
     @php
         $allPets = session('pets', []);
+        $allServices = session('services', []);
     @endphp
 
     <form action="{{ route('reservations.store') }}" method="POST" class="reservation-form">
@@ -45,24 +46,27 @@
         </div>
 
         <div class="form-group">
-            <label for="service_type">Service Type:</label>
-            <select name="service_type" id="service_type" required>
-                <option value="Bath" {{ old('service_type') == 'Bath' ? 'selected' : '' }}>Bath</option>
-                <option value="Grooming" {{ old('service_type') == 'Grooming' ? 'selected' : '' }}>Grooming</option>
+            <label for="service_id">Serviço:</label>
+            <select name="service_id" id="service_id" required>
+                @foreach($allServices as $service)
+                    <option value="{{ $service['id'] }}" {{ old('service_id') == $service['id'] ? 'selected' : '' }}>
+                        {{ $service['name'] }}
+                    </option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="date">Date:</label>
+            <label for="date">Data:</label>
             <input type="date" name="date" id="date" value="{{ old('date') }}" required>
         </div>
 
         <div class="form-group">
-            <label for="time">Time:</label>
+            <label for="time">Hora:</label>
             <input type="time" name="time" id="time" value="{{ old('time') }}" required>
         </div>
 
-        <button type="submit" class="btn-submit">Create Reservation</button>
+        <button type="submit" class="btn-submit">Criar Reserva</button>
     </form>
 </div>
 @endsection
