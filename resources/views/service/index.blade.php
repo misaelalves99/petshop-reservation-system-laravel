@@ -1,5 +1,3 @@
-<!-- petshop-reservation-system/resources/views/service/index.blade.php -->
-
 @extends('layouts.app')
 
 @push('styles')
@@ -35,6 +33,7 @@
                     <th>Preço (R$)</th>
                     <th>Duração (min)</th>
                     <th>Ações</th>
+                    <th>Detalhes</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,10 +53,13 @@
                                 </button>
                             </form>
                         </td>
+                        <td>
+                            <a href="{{ route('service.details', $service['id']) }}" class="btn-details">Ver Detalhes</a>
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="no-data">Nenhum serviço encontrado.</td>
+                        <td colspan="5" class="no-data">Nenhum serviço encontrado.</td>
                     </tr>
                 @endforelse
             </tbody>

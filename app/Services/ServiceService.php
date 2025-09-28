@@ -44,24 +44,24 @@ class ServiceService
     /**
      * Cria um novo serviço em memória
      */
-    public static function create(array $dados): array
+    public static function create(array $data): array
     {
         $services = self::getAll();
-        $dados['id'] = count($services) ? max(array_column($services, 'id')) + 1 : 1;
-        $services[] = $dados;
+        $data['id'] = count($services) ? max(array_column($services, 'id')) + 1 : 1;
+        $services[] = $data;
         session(['services' => $services]);
-        return $dados;
+        return $data;
     }
 
     /**
      * Atualiza um serviço existente em memória
      */
-    public static function update(int $id, array $dados): ?array
+    public static function update(int $id, array $data): ?array
     {
         $services = self::getAll();
         foreach ($services as &$service) {
             if ($service['id'] === $id) {
-                $service = array_merge($service, $dados);
+                $service = array_merge($service, $data);
                 session(['services' => $services]);
                 return $service;
             }

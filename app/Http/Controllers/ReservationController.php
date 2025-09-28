@@ -145,4 +145,13 @@ class ReservationController extends Controller
             'summary' => $summary,
         ]);
     }
+    public function details($id)
+    {
+        $reservations = session('reservations', []);
+        $reservation = collect($reservations)->firstWhere('id', $id);
+
+        if (!$reservation) abort(404, 'Reserva não encontrada');
+
+        return view('reservation.details', compact('reservation'));
+    }
 }

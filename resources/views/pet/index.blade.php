@@ -43,6 +43,7 @@
                     <th>Idade</th>
                     <th>Reservas</th>
                     <th>Ações</th>
+                    <th>Detalhes</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,10 +70,13 @@
                                 <button type="submit" class="action-delete" onclick="return confirm('Tem certeza que deseja deletar este pet?')">Deletar</button>
                             </form>
                         </td>
+                        <td class="details">
+                            <a href="{{ route('pet.details', $pet['id']) }}" class="btn-details">Ver Detalhes</a>
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="no-data">Nenhum pet encontrado.</td>
+                        <td colspan="6" class="no-data">Nenhum pet encontrado.</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -40,6 +40,7 @@
                 <th>Hora</th>
                 <th>Status</th>
                 <th class="actions-col">Ações</th>
+                <th>Detalhes</th>
             </tr>
         </thead>
         <tbody>
@@ -65,10 +66,13 @@
                             </button>
                         </form>
                     </td>
+                    <td>
+                        <a href="{{ route('reservations.details', $res['id']) }}" class="btn-details">Ver Detalhes</a>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="empty">Nenhuma reserva encontrada.</td>
+                    <td colspan="7" class="empty">Nenhuma reserva encontrada.</td>
                 </tr>
             @endforelse
         </tbody>

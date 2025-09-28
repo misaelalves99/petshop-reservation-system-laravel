@@ -1,0 +1,100 @@
+/* Container principal */
+.reservation-details-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Título da página */
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+}
+
+/* Mensagem de sucesso */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+/* Informações da reserva */
+.reservation-info h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+}
+
+.reservation-info p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #4b5563;
+}
+
+.status {
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.status.pendente {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+
+.status.confirmado {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status.cancelado {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Botões de ação */
+.actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.actions .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #9ca3af;
+    color: #fff;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .actions {
+        flex-direction: column;
+    }
+}

@@ -43,9 +43,19 @@ class PetService
     public static function criar(array $dados): array
     {
         $pets = self::todos();
-        $dados['id'] = count($pets) ? max(array_column($pets, 'id')) + 1 : 1;
+
+        // Garante próximo ID
+        $novoId = count($pets) ? max(array_column($pets, 'id')) + 1 : 1;
+        $dados['id'] = $novoId;
+
+        // Garante que age esteja presente
+        if (!isset($dados['age'])) {
+            $dados['age'] = null;
+        }
+
         $pets[] = $dados;
         session(['pets' => $pets]);
+
         return $dados;
     }
 
@@ -55,13 +65,22 @@ class PetService
     public static function atualizar(int $id, array $dados): ?array
     {
         $pets = self::todos();
+
         foreach ($pets as &$pet) {
             if ($pet['id'] === $id) {
+                // Mantém campos existentes e sobrescreve com novos
                 $pet = array_merge($pet, $dados);
+
+                // Garante que age exista
+                if (!isset($pet['age'])) {
+                    $pet['age'] = null;
+                }
+
                 session(['pets' => $pets]);
                 return $pet;
             }
         }
+
         return null;
     }
 

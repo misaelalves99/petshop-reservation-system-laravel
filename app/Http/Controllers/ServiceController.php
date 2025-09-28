@@ -108,4 +108,14 @@ class ServiceController extends Controller
 
         return redirect()->route('service.index')->with('success', 'Serviço excluído com sucesso.');
     }
+
+    public function details($id)
+    {
+        $services = session('services', []);
+        $service = collect($services)->firstWhere('id', $id);
+
+        if (!$service) abort(404, 'Serviço não encontrado');
+
+        return view('service.details', compact('service'));
+    }
 }

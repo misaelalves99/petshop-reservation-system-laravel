@@ -106,4 +106,16 @@ class PetController extends Controller
         PetService::deletar($id);
         return redirect()->route('pet.index')->with('success', 'Pet deletado com sucesso.');
     }
+
+    public function details($id)
+    {
+        $pets = session('pets', []);
+        $pet = collect($pets)->firstWhere('id', $id);
+
+        if (!$pet) {
+            abort(404, 'Pet não encontrado');
+        }
+
+        return view('pet.details', compact('pet'));
+    }
 }
