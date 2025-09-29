@@ -79,7 +79,16 @@
     outline: none;
 }
 
-/* Botão */
+/* Ações (botões juntos) */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Botão principal */
 .btn-submit {
     background-color: #007bff;
     color: #fff;
@@ -90,9 +99,31 @@
     font-weight: 500;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
+    flex: 1;
+    text-align: center;
 }
 
 .btn-submit:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Botão voltar */
+.btn-back {
+    background-color: #6c757d;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    transition: background 0.3s, transform 0.2s;
+    flex: 1;
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
     transform: translateY(-2px);
 }

@@ -8,6 +8,7 @@
 <div class="form-container">
     <h1 class="form-title">Adicionar Novo Pet</h1>
 
+    <!-- Erros de validação -->
     @if($errors->any())
         <div class="form-errors">
             <ul>
@@ -18,8 +19,10 @@
         </div>
     @endif
 
+    <!-- Formulário -->
     <form action="{{ route('pet.store') }}" method="POST" class="pet-form">
-        @csrf
+        @csrf <!-- Token CSRF obrigatório -->
+        
         <div class="form-group">
             <label for="name">Nome:</label>
             <input type="text" name="name" id="name" value="{{ old('name') }}" required>
@@ -35,7 +38,10 @@
             <input type="number" name="age" id="age" value="{{ old('age') }}">
         </div>
 
-        <button type="submit" class="btn-submit">Criar Pet</button>
+        <div class="form-buttons">
+            <button type="submit" class="btn-submit">Criar Pet</button>
+            <a href="{{ route('pet.index') }}" class="btn-back">⬅️ Voltar</a>
+        </div>
     </form>
 </div>
 @endsection

@@ -1,5 +1,3 @@
-<!-- petshop-reservation-system/resources/views/service/create.blade.php -->
-
 @extends('layouts.app')
 
 @push('styles')
@@ -39,8 +37,14 @@
             <input type="number" name="duration" id="duration" value="{{ old('duration') }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Criar Serviço</button>
-        <a href="{{ route('service.index') }}" class="btn btn-secondary">Cancelar</a>
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">
+                ✏️ Criar Serviço
+            </button>
+            <a href="{{ route('service.index') }}" class="btn btn-secondary">
+                ⬅️ Voltar
+            </a>
+        </div>
     </form>
 </div>
 @endsection

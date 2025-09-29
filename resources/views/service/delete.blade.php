@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
-    @vite('resources/css/service/index.css')
+    @vite('resources/css/service/delete.css')
 @endpush
 
 @section('content')

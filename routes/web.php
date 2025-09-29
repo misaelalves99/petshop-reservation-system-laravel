@@ -24,7 +24,7 @@ Route::prefix('pet')->group(function () {
     Route::put('/{pet}', [PetController::class, 'update'])->name('pet.update');
     Route::delete('/{pet}', [PetController::class, 'destroy'])->name('pet.destroy');
     Route::get('/{pet}/details', [PetController::class, 'details'])->name('pet.details');
-    Route::get('/pet/{pet}/delete', [PetController::class, 'delete'])->name('pet.delete');
+    Route::get('/{pet}/delete', [PetController::class, 'delete'])->name('pet.delete');
 });
 
 // Serviços
@@ -36,7 +36,6 @@ Route::prefix('service')->group(function () {
     Route::put('/{service}', [ServiceController::class, 'update'])->name('service.update');
     Route::delete('/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
     Route::get('/{service}/delete', [ServiceController::class, 'delete'])->name('service.delete');
-
     Route::get('/{service}/details', [ServiceController::class, 'details'])->name('service.details');
 });
 
@@ -49,9 +48,6 @@ Route::prefix('reservation')->group(function () {
     Route::put('/{id}', [ReservationController::class, 'update'])->name('reservations.update');
     Route::delete('/{id}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
     Route::get('/{id}/delete', [ReservationController::class, 'delete'])->name('reservations.delete');
-
-    // Nova rota: detalhes da reserva
     Route::get('/{id}/details', [ReservationController::class, 'details'])->name('reservations.details');
-
     Route::get('/report', [ReservationController::class, 'dashboard'])->name('reservation.report');
 });

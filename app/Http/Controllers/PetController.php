@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Services\PetService;
-use App\Services\ServiceService;
 
 class PetController extends Controller
 {
@@ -57,15 +56,19 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
+        // Validação
         $data = $request->validate([
             'name'    => 'required|string|max:255',
             'species' => 'required|string|max:255',
             'age'     => 'nullable|integer|min:0',
         ]);
 
-        PetService::criar($data);
+        // Criação em memória (sessão)
+        $newPet = PetService::criar($data);
 
-        return redirect()->route('pet.index')->with('success', 'Pet criado com sucesso.');
+        // Redireciona com mensagem de sucesso
+        return redirect()->route('pet.index')
+                         ->with('success', "Pet '{$newPet['name']}' criado com sucesso.");
     }
 
     /**
@@ -73,13 +76,19 @@ class PetController extends Controller
      */
     public function edit($id)
     {
-        $pet = PetService::buscar($id);
-        if (!$pet) {
-            abort(404, 'Pet não encontrado');
-        }
+        $pets = session('pets', []);
+        $pet = collect($pets)->firstWhere('id', $id);
 
-        $services = ServiceService::getAll(); // Para exibir nomes de serviços nas reservas
-        return view('pet.edit', compact('pet', 'services'));
+        if (!$pet) abort(404, 'Pet não encontrado');
+
+        // Recupera todas as reservas relacionadas ao pet
+        $reservations = session('reservations', []);
+        $petReservations = array_filter($reservations, fn($r) => $r['pet_id'] == $id);
+
+        // Recupera todos os serviços
+        $services = session('services', []);
+
+        return view('pet.edit', compact('pet', 'petReservations', 'services'));
     }
 
     /**
@@ -107,11 +116,12 @@ class PetController extends Controller
         return redirect()->route('pet.index')->with('success', 'Pet deletado com sucesso.');
     }
 
+    /**
+     * Exibe detalhes do pet
+     */
     public function details($id)
     {
-        $pets = session('pets', []);
-        $pet = collect($pets)->firstWhere('id', $id);
-
+        $pet = PetService::buscar($id);
         if (!$pet) {
             abort(404, 'Pet não encontrado');
         }
@@ -119,11 +129,12 @@ class PetController extends Controller
         return view('pet.details', compact('pet'));
     }
 
+    /**
+     * Tela de confirmação de exclusão do pet
+     */
     public function delete($id)
     {
-        $pets = session('pets', []);
-        $pet = collect($pets)->firstWhere('id', $id);
-
+        $pet = PetService::buscar($id);
         if (!$pet) {
             abort(404, 'Pet não encontrado');
         }

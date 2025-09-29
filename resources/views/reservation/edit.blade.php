@@ -1,5 +1,3 @@
-<!-- petshop-reservation-system/resources/views/reservation/edit.blade.php -->
-
 @extends('layouts.app')
 
 @push('styles')
@@ -12,7 +10,7 @@
 
     <!-- Mensagens de erro -->
     @if($errors->any())
-        <div class="alert-error">
+        <div class="alert alert-error">
             <ul>
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -68,9 +66,13 @@
             </select>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Atualizar Reserva</button>
-            <a href="{{ route('reservations.index') }}" class="btn btn-secondary">Cancelar</a>
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">
+                ✏️ Atualizar Reserva
+            </button>
+            <a href="{{ route('reservations.index') }}" class="btn btn-secondary">
+                ⬅️ Voltar
+            </a>
         </div>
     </form>
 </div>

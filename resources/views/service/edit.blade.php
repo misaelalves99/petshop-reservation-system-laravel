@@ -21,7 +21,6 @@
         </div>
     @endif
 
-    <!-- Formulário de edição -->
     <form action="{{ route('service.update', $service['id']) }}" method="POST" class="form-card">
         @csrf
         @method('PUT')
@@ -41,8 +40,14 @@
             <input type="number" name="duration" id="duration" value="{{ old('duration', $service['duration']) }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Atualizar Serviço</button>
-        <a href="{{ route('service.index') }}" class="btn btn-secondary">Cancelar</a>
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">
+                ✏️ Atualizar Serviço
+            </button>
+            <a href="{{ route('service.index') }}" class="btn btn-secondary">
+                ⬅️ Voltar
+            </a>
+        </div>
     </form>
 </div>
 @endsection

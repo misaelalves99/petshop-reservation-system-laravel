@@ -8,11 +8,8 @@
 <div class="service-details-container">
     <h1 class="page-title">Detalhes do Serviço</h1>
 
-    <!-- Mensagem de sucesso -->
     @if(session('success'))
-        <div class="alert-success">
-            {{ session('success') }}
-        </div>
+        <div class="alert-success">{{ session('success') }}</div>
     @endif
 
     @php

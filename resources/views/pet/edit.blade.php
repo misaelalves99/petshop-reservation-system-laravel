@@ -1,5 +1,3 @@
-<!-- petshop-reservation-system/resources/views/pet/edit.blade.php -->
-
 @extends('layouts.app')
 
 @push('styles')
@@ -43,7 +41,14 @@
             <input type="number" name="age" id="age" value="{{ old('age', $pet['age']) }}">
         </div>
 
-        <button type="submit" class="btn-submit">Atualizar Pet</button>
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">
+                ✏️ Atualizar Pet
+            </button>
+            <a href="{{ route('pet.index') }}" class="btn btn-secondary">
+                ⬅️ Voltar
+            </a>
+        </div>
     </form>
 </div>
 
@@ -51,7 +56,9 @@
 
 <div class="reservations-section">
     <h2>Reservas de {{ $pet['name'] }}</h2>
-    <a href="{{ route('reservations.create') }}?pet_id={{ $pet['id'] }}" class="btn-new-reservation">Adicionar Nova Reserva</a>
+    <a href="{{ route('reservations.create') }}?pet_id={{ $pet['id'] }}" class="btn btn-primary">
+        ➕ Adicionar Nova Reserva
+    </a>
 
     @php
         $allReservations = session('reservations', []);
@@ -78,12 +85,12 @@
                     <td>{{ $res['date'] }}</td>
                     <td>{{ $res['time'] }}</td>
                     <td>{{ ucfirst($res['status'] ?? 'pendente') }}</td>
-                    <td>
-                        <a href="{{ route('reservations.edit', $res['id']) }}" class="action-edit">Editar</a>
+                    <td class="actions">
+                        <a href="{{ route('reservations.edit', $res['id']) }}" class="action-edit">✏️ Editar</a>
                         <form action="{{ route('reservations.destroy', $res['id']) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="action-delete" onclick="return confirm('Tem certeza que deseja deletar esta reserva?')">Deletar</button>
+                            <button type="submit" class="action-delete" onclick="return confirm('Tem certeza que deseja deletar esta reserva?')">🗑️ Deletar</button>
                         </form>
                     </td>
                 </tr>

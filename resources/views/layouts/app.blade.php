@@ -21,9 +21,9 @@
             </div>
             <nav>
                 <a href="{{ route('home') }}">Início</a>
-                <a href="{{ route('reservations.index') }}">Reservas</a>
-                <a href="{{ route('service.index') }}">Serviços</a>
                 <a href="{{ route('pet.index') }}">Pets</a>
+                <a href="{{ route('service.index') }}">Serviços</a>
+                <a href="{{ route('reservations.index') }}">Reservas</a>
             </nav>
         </div>
     </header>

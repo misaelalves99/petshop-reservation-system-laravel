@@ -39,19 +39,26 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+        // Validação
         $validated = $request->validate([
-            'pet_id' => 'required',
-            'service_type' => 'required|string',
+            'pet_id' => 'required|integer',
+            'service_id' => 'required|integer',
             'date' => 'required|date',
             'time' => 'required',
-            'status' => 'nullable|string',
         ]);
 
+        // Recupera o serviço pelo ID
+        $allServices = session('services', []);
+        $service = collect($allServices)->firstWhere('id', $validated['service_id']);
+        $validated['service_type'] = $service['name'] ?? 'Desconhecido';
+
+        // Recupera as reservas existentes
         $reservations = session('reservations', []);
         $validated['id'] = count($reservations) ? max(array_column($reservations, 'id')) + 1 : 1;
-        $validated['status'] = $validated['status'] ?? 'pendente';
-        $reservations[] = $validated;
+        $validated['status'] = 'pendente';
 
+        // Salva na sessão
+        $reservations[] = $validated;
         session(['reservations' => $reservations]);
 
         return redirect()->route('reservations.index')->with('success', 'Reserva criada com sucesso.');

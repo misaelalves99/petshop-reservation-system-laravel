@@ -5,54 +5,68 @@
 @endpush
 
 @section('content')
-<div class="service-index-container">
+<div class="service-container">
     <h1 class="page-title">Serviços</h1>
 
-    <!-- Mensagem de sucesso -->
+    {{-- Mensagem de sucesso --}}
     @if(session('success'))
-        <div class="alert alert-success">
+        <div class="alert-success">
             {{ session('success') }}
         </div>
     @endif
 
-    <!-- Botão de adicionar serviço -->
-    <div class="actions-bar">
-        <a href="{{ route('service.create') }}" class="btn btn-primary">+ Adicionar Novo Serviço</a>
+    {{-- Ações principais --}}
+    <div class="actions">
+        <a href="{{ route('service.create') }}" class="btn btn-primary">
+            <span class="icon">➕</span> Novo Serviço
+        </a>
     </div>
 
     @php
         $services = session('services', []);
     @endphp
 
-    <!-- Tabela de serviços -->
+    {{-- Tabela --}}
     <div class="table-container">
-        <table class="styled-table">
+        <table class="service-table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nome</th>
                     <th>Preço (R$)</th>
                     <th>Duração (min)</th>
-                    <th>Ações</th>
+                    <th class="actions-col">Ações</th>
                     <th>Detalhes</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($services as $service)
                     <tr>
+                        <td>{{ $service['id'] }}</td>
                         <td>{{ $service['name'] }}</td>
                         <td>R$ {{ number_format($service['price'], 2, ',', '.') }}</td>
                         <td>{{ $service['duration'] }}</td>
-                        <td class="table-actions">
-                            <a href="{{ route('service.edit', $service['id']) }}" class="btn-link edit">Editar</a>
-                            <a href="{{ route('service.delete', $service['id']) }}" class="btn-link delete">Excluir</a>
+                        <td>
+                            {{-- Botão Editar --}}
+                            <a href="{{ route('service.edit', $service['id']) }}" class="action-link edit">
+                                <span class="icon">✏️</span> Editar
+                            </a>
+
+                            {{-- Botão Excluir --}}
+                            <a href="{{ route('service.delete', $service['id']) }}" class="action-link delete">
+                                <span class="icon">🗑️</span> Excluir
+                            </a>
                         </td>
                         <td>
-                            <a href="{{ route('service.details', $service['id']) }}" class="btn-details">Ver Detalhes</a>
+                            {{-- Botão Detalhes --}}
+                            <a href="{{ route('service.details', $service['id']) }}" class="btn-details">
+                                <span class="icon">ℹ️</span> Ver Detalhes
+                            </a>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="no-data">Nenhum serviço encontrado.</td>
+                        <td colspan="6" class="empty">Nenhum serviço encontrado.</td>
                     </tr>
                 @endforelse
             </tbody>

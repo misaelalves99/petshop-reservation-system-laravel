@@ -26,26 +26,41 @@
         }
     @endphp
 
-    <!-- Formulário de filtros -->
+    <!-- Filtros -->
     <form method="GET" action="{{ route('reservation.report') }}" class="filter-form">
-        <label for="start_date">De:</label>
-        <input type="date" name="start_date" id="start_date" value="{{ request('start_date') }}">
+        <div class="filter-group">
+            <label for="start_date">De:</label>
+            <input type="date" name="start_date" id="start_date" value="{{ request('start_date') }}">
+        </div>
 
-        <label for="end_date">Até:</label>
-        <input type="date" name="end_date" id="end_date" value="{{ request('end_date') }}">
+        <div class="filter-group">
+            <label for="end_date">Até:</label>
+            <input type="date" name="end_date" id="end_date" value="{{ request('end_date') }}">
+        </div>
 
-        <button type="submit" class="btn btn-primary">Filtrar</button>
-        <a href="{{ route('reservation.report') }}" class="btn btn-secondary">Redefinir</a>
+        <div class="filter-actions">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <a href="{{ route('reservation.report') }}" class="btn btn-secondary">Redefinir</a>
+        </div>
     </form>
 
     <!-- Resumo -->
     <div class="summary-card">
         <h3>Resumo</h3>
-        <ul>
-            <li><strong>Total de Reservas:</strong> {{ count($allReservations) }}</li>
-            <li><strong>Banho:</strong> {{ count(array_filter($allReservations, fn($r) => $r['service_type']=='Bath')) }}</li>
-            <li><strong>Tosa:</strong> {{ count(array_filter($allReservations, fn($r) => $r['service_type']=='Grooming')) }}</li>
-        </ul>
+        <div class="summary-items">
+            <div class="summary-item">
+                <span class="summary-label">Total de Reservas</span>
+                <span class="summary-value">{{ count($allReservations) }}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Banho</span>
+                <span class="summary-value">{{ count(array_filter($allReservations, fn($r) => $r['service_type']=='Bath')) }}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Tosa</span>
+                <span class="summary-value">{{ count(array_filter($allReservations, fn($r) => $r['service_type']=='Grooming')) }}</span>
+            </div>
+        </div>
     </div>
 
     <!-- Tabela -->
@@ -68,7 +83,7 @@
                         <td>{{ $res['date'] }}</td>
                         <td>{{ $res['time'] }}</td>
                         <td>
-                            <span class="status {{ strtolower($res['status'] ?? 'pendente') }}">
+                            <span class="status {{ strtolower($res['status'] ?? 'pending') }}">
                                 {{ ucfirst($res['status'] ?? 'Pendente') }}
                             </span>
                         </td>

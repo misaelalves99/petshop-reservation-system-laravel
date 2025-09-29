@@ -38,7 +38,7 @@
             <label for="pet_id">Pet:</label>
             <select name="pet_id" id="pet_id" required>
                 @foreach($allPets as $pet)
-                    <option value="{{ $pet['id'] }}" {{ request('pet_id') == $pet['id'] ? 'selected' : '' }}>
+                    <option value="{{ $pet['id'] }}" {{ old('pet_id') == $pet['id'] ? 'selected' : '' }}>
                         {{ $pet['name'] }} ({{ $pet['species'] }})
                     </option>
                 @endforeach
@@ -66,7 +66,10 @@
             <input type="time" name="time" id="time" value="{{ old('time') }}" required>
         </div>
 
-        <button type="submit" class="btn-submit">Criar Reserva</button>
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">Criar Reserva</button>
+            <a href="{{ route('reservations.index') }}" class="btn-back">⬅ Voltar</a>
+        </div>
     </form>
 </div>
 @endsection

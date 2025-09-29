@@ -1,32 +1,32 @@
-/* petshop-reservation-system/resources/css/pet/details.css */
-
 /* Container principal */
 .pet-details-container {
-    max-width: 1000px;
+    max-width: 700px;
     margin: 2rem auto;
-    padding: 1.5rem;
+    padding: 2rem;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
     font-family: 'Inter', sans-serif;
 }
 
 /* Título da página */
-.pet-details-container .page-title {
+.page-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #333;
-    margin-bottom: 1.5rem;
+    color: #111827;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 /* Mensagem de sucesso */
-.form-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
     padding: 0.8rem 1rem;
-    border-radius: 6px;
-    margin-bottom: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
     font-weight: 500;
 }
 
@@ -35,7 +35,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .pet-info h2 {
@@ -54,7 +54,6 @@
     margin-top: 1rem;
     display: flex;
     gap: 0.5rem;
-    flex-wrap: wrap;
 }
 
 .pet-info .btn {
@@ -65,21 +64,25 @@
     font-weight: 500;
     text-decoration: none;
     text-align: center;
+    transition: all 0.2s ease-in-out;
 }
 
-.pet-info .btn-primary {
+.btn-primary {
     background-color: #3b82f6;
     color: #fff;
 }
 
-.pet-info .btn-success {
-    background-color: #10b981;
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
     color: #fff;
 }
 
-.pet-info .btn-danger {
-    background-color: #ef4444;
-    color: #fff;
+.btn-secondary:hover {
+    background-color: #4b5563;
 }
 
 /* Separador */
@@ -90,7 +93,7 @@
     background: #e5e7eb;
 }
 
-/* Seção de reservas */
+/* Tabela de reservas */
 .reservations-section h2 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -98,7 +101,6 @@
     color: #111827;
 }
 
-/* Tabela de reservas */
 .reservations-table {
     width: 100%;
     border-collapse: collapse;
@@ -153,28 +155,6 @@
     color: #b91c1c;
 }
 
-/* Ações da tabela */
-.reservations-table .actions a,
-.reservations-table .actions button {
-    font-size: 0.85rem;
-    text-decoration: none;
-    padding: 0.3rem 0.6rem;
-    border-radius: 6px;
-    margin-right: 0.3rem;
-    cursor: pointer;
-    border: none;
-}
-
-.reservations-table .actions .action-edit {
-    background-color: #3b82f6;
-    color: #fff;
-}
-
-.reservations-table .actions .action-delete {
-    background-color: #ef4444;
-    color: #fff;
-}
-
 /* Mensagem "nenhuma reserva" */
 .no-data {
     text-align: center;
@@ -187,7 +167,6 @@
 @media (max-width: 768px) {
     .pet-info .actions {
         flex-direction: column;
-        gap: 0.5rem;
     }
 
     .reservations-table th,

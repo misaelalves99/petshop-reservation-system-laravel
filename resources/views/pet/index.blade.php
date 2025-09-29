@@ -6,12 +6,14 @@
 
 @section('content')
 <div class="pets-container">
-    <h1 class="page-title">Pets</h1>
+    <h1 class="page-title">
+        <i class="fas fa-paw"></i> Pets
+    </h1>
 
     <!-- Mensagem de sucesso -->
     @if(session('success'))
         <div class="form-success">
-            {{ session('success') }}
+            <i class="fas fa-check-circle"></i> {{ session('success') }}
         </div>
     @endif
 
@@ -19,9 +21,13 @@
     <div class="search-add-container">
         <form method="GET" action="{{ route('pet.index') }}" class="search-form">
             <input type="text" name="search" placeholder="Pesquisar por nome" value="{{ request('search') }}">
-            <button type="submit">Buscar</button>
+            <button type="submit">
+                <i class="fas fa-search"></i> Buscar
+            </button>
         </form>
-        <a href="{{ route('pet.create') }}" class="btn-add-pet">Adicionar Novo Pet</a>
+        <a href="{{ route('pet.create') }}" class="btn-add-pet">
+            <i class="fas fa-plus-circle"></i> Adicionar Novo Pet
+        </a>
     </div>
 
     @php
@@ -38,12 +44,13 @@
         <table class="pets-table">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Espécie</th>
-                    <th>Idade</th>
-                    <th>Reservas</th>
-                    <th>Ações</th>
-                    <th>Detalhes</th>
+                    <th>ID</th>
+                    <th><i class="fas fa-signature"></i> Nome</th>
+                    <th><i class="fas fa-dog"></i> Espécie</th>
+                    <th><i class="fas fa-birthday-cake"></i> Idade</th>
+                    <th><i class="fas fa-calendar-alt"></i> Reservas</th>
+                    <th><i class="fas fa-cogs"></i> Ações</th>
+                    <th><i class="fas fa-info-circle"></i> Detalhes</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,26 +60,34 @@
                         $petReservations = array_filter($allReservations, fn($r) => $r['pet_id'] == $pet['id']);
                     @endphp
                     <tr>
+                        <td>{{ $pet['id'] }}</td>
                         <td>{{ $pet['name'] }}</td>
                         <td>{{ $pet['species'] }}</td>
                         <td>{{ $pet['age'] ?? '-' }}</td>
                         <td>
                             <a href="{{ route('pet.edit', $pet['id']) }}" class="link-reservations">
-                                {{ count($petReservations) }} reserva(s)
+                                <i class="fas fa-calendar-check"></i> {{ count($petReservations) }} reserva(s)
                             </a>
                         </td>
                         <td class="actions">
-                            <a href="{{ route('pet.edit', $pet['id']) }}" class="action-edit">Editar</a>
-                            <a href="{{ route('reservations.create') }}?pet_id={{ $pet['id'] }}" class="action-add">Adicionar Reserva</a>
-                            <a href="{{ route('pet.delete', $pet['id']) }}" class="action-delete">Deletar</a>
+                            <a href="{{ route('pet.edit', $pet['id']) }}" class="action-edit">
+                                ✏️ Editar
+                            </a>
+                            <a href="{{ route('pet.delete', $pet['id']) }}" class="action-delete">
+                                🗑️ Excluir
+                            </a>
                         </td>
                         <td class="details">
-                            <a href="{{ route('pet.details', $pet['id']) }}" class="btn-details">Ver Detalhes</a>
+                            <a href="{{ route('pet.details', $pet['id']) }}" class="btn-details">
+                                ℹ️ Ver Detalhes
+                            </a>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="no-data">Nenhum pet encontrado.</td>
+                        <td colspan="7" class="no-data">
+                            <i class="fas fa-info-circle"></i> Nenhum pet encontrado.
+                        </td>
                     </tr>
                 @endforelse
             </tbody>

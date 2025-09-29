@@ -1,136 +1,173 @@
-/* Container principal */
+/* =========================
+   Container principal
+========================= */
 .reservation-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 25px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 30px 35px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Título */
+/* =========================
+   Título
+========================= */
 .page-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
     text-align: center;
+    margin-bottom: 25px;
 }
 
-/* Alertas */
+/* =========================
+   Alertas
+========================= */
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 12px 15px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    border-left: 4px solid #28a745;
+    background-color: #e6ffed;
+    color: #1b5e20;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border-left: 5px solid #28a745;
+    font-weight: 500;
 }
 
-/* Ações principais */
+/* =========================
+   Ações principais
+========================= */
 .actions {
     display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
 }
 
 .btn {
-    display: inline-block;
-    padding: 10px 15px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 8px;
     font-size: 0.95rem;
-    transition: background 0.3s, transform 0.2s;
+    font-weight: 600;
+    text-decoration: none;
     cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
 }
 
+/* Botões específicos */
 .btn-primary {
-    background: #007bff;
-    color: #fff;
+    background-color: #007bff;
+    color: #ffffff;
 }
 
 .btn-primary:hover {
-    background: #0056b3;
+    background-color: #0056b3;
     transform: translateY(-2px);
 }
 
 .btn-success {
-    background: #28a745;
-    color: #fff;
+    background-color: #17a2b8;
+    color: #ffffff;
 }
 
 .btn-success:hover {
-    background: #1e7e34;
+    background-color: #1e7e34;
     transform: translateY(-2px);
 }
 
-/* Tabela */
+.btn-danger {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   Tabela de reservas
+========================= */
 .reservation-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
     font-size: 0.95rem;
 }
 
 .reservation-table th,
 .reservation-table td {
-    padding: 12px;
+    padding: 14px 12px;
     border-bottom: 1px solid #e0e0e0;
     text-align: left;
+    vertical-align: middle;
 }
 
 .reservation-table th {
-    background-color: #f8f9fa;
+    background-color: #f7f9fa;
+    color: #34495e;
     font-weight: 600;
-    color: #444;
 }
 
 .reservation-table tbody tr:hover {
-    background: #f9f9f9;
+    background-color: #f1f5f8;
+    transition: background 0.3s ease;
 }
 
-/* Coluna de ações */
+/* =========================
+   Coluna de ações
+========================= */
 .actions-col {
-    width: 150px;
+    width: 160px;
 }
 
-/* Status */
+/* =========================
+   Status
+========================= */
 .status {
-    padding: 6px 10px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: capitalize;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px;
 }
 
 .status.pending {
-    background: #fff3cd;
-    color: #856404;
+    background: #fff4e5;
+    color: #ad6800;
 }
 
 .status.completed {
-    background: #d4edda;
-    color: #155724;
+    background: #e6ffed;
+    color: #1b5e20;
 }
 
 .status.canceled {
-    background: #f8d7da;
-    color: #721c24;
+    background: #ffe6e6;
+    color: #b71c1c;
 }
 
-/* Links de ação */
+/* =========================
+   Links de ação (editar/excluir)
+========================= */
 .action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    border: none;
-    background: none;
-    padding: 0;
-    margin-right: 8px;
-    transition: color 0.2s;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.2s;
 }
 
 .action-link.edit {
@@ -138,6 +175,7 @@
 }
 
 .action-link.edit:hover {
+    background-color: #e6f4ea;
     color: #1e7e34;
 }
 
@@ -146,17 +184,53 @@
 }
 
 .action-link.delete:hover {
+    background-color: #fceaea;
     color: #a71d2a;
 }
 
-/* Form inline */
-.inline-form {
-    display: inline;
+/* =========================
+   Botão de detalhes
+========================= */
+.btn-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #17a2b8;
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-/* Linha vazia */
+.btn-details:hover {
+    background-color: #117a8b;
+}
+
+/* =========================
+   Linha vazia
+========================= */
 .empty {
     text-align: center;
-    color: #666;
+    color: #7f8c8d;
     font-style: italic;
 }
+
+/* =========================
+   Ícones nos botões (React Icons)
+========================= */
+/* Use algo assim no JSX:
+import { FaEdit, FaTrashAlt, FaInfoCircle } from "react-icons/fa";
+
+<button className="btn btn-primary">
+  <FaEdit /> Editar
+</button>
+<a className="btn btn-danger">
+  <FaTrashAlt /> Excluir
+</a>
+<a className="btn-details">
+  <FaInfoCircle /> Detalhes
+</a>
+*/
